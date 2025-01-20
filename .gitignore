@@ -1,0 +1,56 @@
+# Visual Studio temporary files and folders
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+bin/
+obj/
+
+# Rider temporary files
+.idea/
+
+# VS Code settings
+.vscode/
+
+# User-specific files
+*.rsuser
+*.userprefs
+*.lock.json
+
+# .NET files
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.dbmdl
+*.log
+
+# .NET Core files
+*.runtimeconfig.json
+*.deps.json
+
+# C# files
+**/*.dll
+**/*.exe
+**/*.pdb
+**/*.cache
+**/*.log
+
+# NuGet
+*.nupkg
+*.nuget/
+
+# MSBuild files
+*.props
+*.targets
+
+# Backup & Package files
+*.bak
+*.swp
+*.swm
+
+# Other
+temp/
+*.tmp
