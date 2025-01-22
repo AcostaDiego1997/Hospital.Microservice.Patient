@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microservice.Patients.Application.CQRS.Commands;
+using Microservice.Patients.Application.Commands.Request;
 using Microservice.Patients.Application.Interfaces.UnitOfWork;
 using Microservice.Patients.Domain.Patient;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microservice.Patients.Application.Handlers.Commands
+namespace Microservice.Patients.Application.Commands.Handlers
 {
     public class DeletePatient_CommandHandler : IRequestHandler<DeletePatient_Command, int?>
     {

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Microservice.Patients.Application.CQRS.Commands;
+using Microservice.Patients.Application.Commands.Request;
 using Microservice.Patients.Application.DTO;
 using Microservice.Patients.Domain.Patient;
 

@@ -2,7 +2,7 @@
 using Microservice.Patients.Application.DTO;
 using Microservice.Patients.Domain.Patient.ValueObjects;
 
-namespace Microservice.Patients.Application.CQRS.Commands
+namespace Microservice.Patients.Application.Commands.Request
 {
     public class CreatePatient_Command : IRequest<int>
     {

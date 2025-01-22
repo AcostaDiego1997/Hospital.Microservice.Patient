@@ -18,6 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Microservice.Patients.Application\Microservice.Patients.Application.csproj" />
+    <ProjectReference Include="..\Microservice.Patients.Domain\Microservice.Patients.Domain.csproj" />
+    <ProjectReference Include="..\Microservice.Patients.Infrastructure\Microservice.Patients.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="NUnit.Framework" />
   </ItemGroup>
 

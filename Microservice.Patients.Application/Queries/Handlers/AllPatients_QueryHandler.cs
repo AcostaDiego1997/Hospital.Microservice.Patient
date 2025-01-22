@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microservice.Patients.Application.CQRS.Queries;
 using Microservice.Patients.Application.DTO;
 using Microservice.Patients.Application.Interfaces.UnitOfWork;
+using Microservice.Patients.Application.Queries.Request;
 using Microservice.Patients.Domain.Patient;
 
-namespace Microservice.Patients.Application.Handlers.Queries
+namespace Microservice.Patients.Application.Queries.Handlers
 {
     public class AllPatients_QueryHandler : IRequestHandler<AllPatients_Query, List<Patient_DTO>>
     {

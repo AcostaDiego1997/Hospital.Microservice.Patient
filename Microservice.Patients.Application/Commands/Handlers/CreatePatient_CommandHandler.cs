@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microservice.Patients.Application.CQRS.Commands;
+using Microservice.Patients.Application.Commands.Request;
 using Microservice.Patients.Application.Interfaces.UnitOfWork;
 using Microservice.Patients.Domain.Patient;
 
-namespace Microservice.Patients.Application.Handlers.Commands
+namespace Microservice.Patients.Application.Commands.Handlers
 {
     public class CreatePatient_CommandHandler : IRequestHandler<CreatePatient_Command, int>
     {

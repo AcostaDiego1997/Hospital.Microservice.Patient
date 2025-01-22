@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Microservice.Patients.Application.CQRS.Commands
+namespace Microservice.Patients.Application.Commands.Request
 {
     public class DeletePatient_Command : IRequest<int?>
     {

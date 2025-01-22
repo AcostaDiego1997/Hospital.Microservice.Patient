@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microservice.Patients.Application.DTO;
 
-namespace Microservice.Patients.Application.CQRS.Queries
+namespace Microservice.Patients.Application.Queries.Request
 {
     public class PatientByDni_Query : IRequest<Patient_DTO>
     {

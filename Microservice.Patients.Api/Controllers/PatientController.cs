@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using Microservice.Patients.Application.CQRS.Commands;
-using Microservice.Patients.Application.CQRS.Queries;
+using Microservice.Patients.Application.Commands.Request;
 using Microservice.Patients.Application.DTO;
 using Microservice.Patients.Application.Interfaces.Service;
+using Microservice.Patients.Application.Queries.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Microservice.Patients.Api.Controllers
