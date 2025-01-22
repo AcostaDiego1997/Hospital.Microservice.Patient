@@ -2,6 +2,7 @@
 using Microservice.Patients.Application.Interfaces.Repository;
 using Microservice.Patients.Domain.Patient;
 using Microservice.Patients.Infrastructure.Context;
+using System.Data.Entity;
 using System.Net;
 
 namespace Microservice.Patients.Infrastructure.Repositories

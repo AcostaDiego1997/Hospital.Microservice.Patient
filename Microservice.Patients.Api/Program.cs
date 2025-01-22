@@ -10,6 +10,7 @@ _ = new Services_Dependencies(builder.Services);
 _ = new Repositories_Dependencies(builder.Services);
 _ = new DataContext_Dependency(builder.Services, settings.AppSettings);
 _ = new AutoMapper_Config(builder.Services);
+_ = new Mediatr_Config(builder.Services);
 //_ = new JWT_Config(builder.Services, settings.AppSettings);
 //_ = new Swagger_Config(builder.Services);
 

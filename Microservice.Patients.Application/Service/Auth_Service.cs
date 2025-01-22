@@ -17,7 +17,7 @@ namespace Microservice.Patients.Application.Service
             _tokenService = tokenService;
         }
 
-        public string CreateToken(string email, string pass)
+        public async Task<string> CreateTokenAsync(string email, string pass)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace Microservice.Patients.Application.Service
             }
             catch (Exception ex)
             {
-                _unitOfWork.RollBackTransaction();
+                await _unitOfWork.RollBackTransactionAsync();
                 throw new Exception(ex.Message);
             }
         }

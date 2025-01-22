@@ -21,7 +21,7 @@ namespace Microservice.Patients.Api.Controllers
         {
             try
             {
-                string token = _authService.CreateToken(email, password);
+                string token = await _authService.CreateTokenAsync(email, password);
                 return Ok(new {
                     IsSuccess= true,
                     Message = token

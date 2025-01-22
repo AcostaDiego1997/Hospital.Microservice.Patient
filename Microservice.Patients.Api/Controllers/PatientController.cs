@@ -1,6 +1,8 @@
-﻿using Microservice.Patients.Application.DTO;
+﻿using MediatR;
+using Microservice.Patients.Application.CQRS.Commands;
+using Microservice.Patients.Application.CQRS.Queries;
+using Microservice.Patients.Application.DTO;
 using Microservice.Patients.Application.Interfaces.Service;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Microservice.Patients.Api.Controllers
@@ -9,12 +11,12 @@ namespace Microservice.Patients.Api.Controllers
     [Route("api/[controller]")]
     public class PatientController : ControllerBase
     {
-        private readonly IPatient_Service _service;
         private readonly IAuth_Service _authservice;
+        private readonly IMediator _mediator;
 
-        public PatientController(IPatient_Service patientService, IAuth_Service authservice) {
-            _service = patientService;
+        public PatientController( IAuth_Service authservice, IMediator mediator) {
             _authservice = authservice;
+            _mediator = mediator;
         }
 
         [HttpGet]
@@ -22,7 +24,9 @@ namespace Microservice.Patients.Api.Controllers
         {
             try
             {
-                Patient_DTO? output = _service.GetByDni(dni);
+                //Patient_DTO? output = _service.GetByDni(dni);
+                Patient_DTO output = await _mediator.Send(new PatientByDni_Query(dni));
+
                 return Ok(new {
                     IsSuccess = true,
                     Message = (output != null) ? "Paciente obtenido con exito" : "El dni ingresado no corresponde a ningun paciente",
@@ -43,7 +47,8 @@ namespace Microservice.Patients.Api.Controllers
         {
             try
             {
-                List<Patient_DTO> output = _service.GetAll();
+                List<Patient_DTO> output = await _mediator.Send(new AllPatients_Query());
+                
                 return Ok(new
                 {
                     IsSuccess = true,
@@ -62,11 +67,12 @@ namespace Microservice.Patients.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Patient_DTO dto)
+        public async Task<IActionResult> PostMadiatr(Patient_DTO dto)
         {
             try
             {
-                _service.Post(dto);
+                CreatePatient_Command req = new(dto);
+                await _mediator.Send(req);
                 return Ok(new
                 {
                     IsSuccess = true,
@@ -89,7 +95,8 @@ namespace Microservice.Patients.Api.Controllers
         {
             try
             {
-                int? output = _service.Delete(dni);
+                //int? output = await _service.Delete(dni);
+                int? output = await _mediator.Send(new DeletePatient_Command(dni));
                 return Ok(new
                 {
                     IsSuccess = true,

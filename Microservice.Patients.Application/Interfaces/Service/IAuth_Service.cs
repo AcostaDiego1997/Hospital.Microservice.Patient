@@ -8,7 +8,7 @@ namespace Microservice.Patients.Application.Interfaces.Service
 {
     public interface IAuth_Service
     {
-        string CreateToken(string email, string pass);
+        Task<string> CreateTokenAsync(string email, string pass);
         bool? ValidateToken(string token);
     }
 }

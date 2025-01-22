@@ -2,6 +2,7 @@
 using Microservice.Patients.Application.Interfaces.UnitOfWork;
 using Microservice.Patients.Infrastructure.Context;
 using Microservice.Patients.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Microservice.Patients.Infrastructure.UnitOfWork
@@ -21,24 +22,24 @@ namespace Microservice.Patients.Infrastructure.UnitOfWork
 
         public IPatient_Repository Patient_Repository => _patientRepository ?? new Patient_Repository(_dataContext);
 
-        public void BeginTransaction()
+        public async Task BeginTransactionAsync()
         {
             if (_transaction != null)
                 return;
 
-            _transaction = _dataContext.Database.BeginTransaction();
+            _transaction = await _dataContext.Database.BeginTransactionAsync();
         }
 
-        public void CommitTransaction()
+        public async Task CommitTransactionAsync()
         {
             try
             {
-                _dataContext.SaveChanges();
-                _transaction.Commit();
+                await _dataContext.SaveChangesAsync();
+                await _transaction.CommitAsync();
             }
             catch (Exception ex) 
             {
-                RollBackTransaction();
+                await RollBackTransactionAsync();
                 throw new Exception(ex.Message);
             }
             finally
@@ -58,11 +59,11 @@ namespace Microservice.Patients.Infrastructure.UnitOfWork
                 _transaction.Dispose();
         }
 
-        public void RollBackTransaction()
+        public async Task RollBackTransactionAsync()
         {
             try
             {
-                _transaction.Rollback();
+                await _transaction.RollbackAsync();
             }
             catch (Exception ex)
             {
@@ -71,9 +72,10 @@ namespace Microservice.Patients.Infrastructure.UnitOfWork
             }
         }
 
-        public void SaveChanges()
+        public async Task<int> SaveChangesAsync()
         {
-            _dataContext.SaveChanges();
+            int output = await _dataContext.SaveChangesAsync();
+            return output;
         }
     }
 }

@@ -11,7 +11,6 @@ namespace Microservice.Patients.Api.Configuration
     public class Services_Dependencies
     {
         public Services_Dependencies(IServiceCollection services){
-            services.AddScoped<IPatient_Service, Patient_Service>();
             services.AddScoped<IAuth_Service, Auth_Service>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IToken, TokenManager>();
