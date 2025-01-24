@@ -22,9 +22,9 @@ namespace Microservice.Patients.Application.Commands.Handlers
             try
             {
                 Patient patient = _mapper.Map<Patient>(request);
-                await _unitOfWork.BeginTransactionAsync();
+                _unitOfWork.BeginTransaction();
                 _unitOfWork.Patient_Repository.Add(patient);
-                int output = await _unitOfWork.SaveChangesAsync();
+                int output = _unitOfWork.SaveChanges();
                 await _unitOfWork.CommitTransactionAsync();
 
                 if (output == 0)

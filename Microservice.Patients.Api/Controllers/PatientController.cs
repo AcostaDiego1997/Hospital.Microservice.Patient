@@ -71,8 +71,7 @@ namespace Microservice.Patients.Api.Controllers
         {
             try
             {
-                CreatePatient_Command req = new(dto);
-                await _mediator.Send(req);
+                await _mediator.Send(new CreatePatient_Command(dto));
                 return Ok(new
                 {
                     IsSuccess = true,

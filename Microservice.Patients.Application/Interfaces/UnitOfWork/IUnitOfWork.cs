@@ -4,8 +4,8 @@ namespace Microservice.Patients.Application.Interfaces.UnitOfWork
 {
     public interface IUnitOfWork : IDisposable
     {
-        Task<int> SaveChangesAsync();
-        Task BeginTransactionAsync();
+        int SaveChanges();
+        void BeginTransaction();
         Task CommitTransactionAsync();
         Task RollBackTransactionAsync();
 

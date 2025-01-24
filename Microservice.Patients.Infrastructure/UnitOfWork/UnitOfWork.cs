@@ -22,12 +22,12 @@ namespace Microservice.Patients.Infrastructure.UnitOfWork
 
         public IPatient_Repository Patient_Repository => _patientRepository ?? new Patient_Repository(_dataContext);
 
-        public async Task BeginTransactionAsync()
+        public void BeginTransaction()
         {
             if (_transaction != null)
                 return;
 
-            _transaction = await _dataContext.Database.BeginTransactionAsync();
+            _transaction = _dataContext.Database.BeginTransaction();
         }
 
         public async Task CommitTransactionAsync()
@@ -72,9 +72,9 @@ namespace Microservice.Patients.Infrastructure.UnitOfWork
             }
         }
 
-        public async Task<int> SaveChangesAsync()
+        public int SaveChanges()
         {
-            int output = await _dataContext.SaveChangesAsync();
+            int output = _dataContext.SaveChanges();
             return output;
         }
     }

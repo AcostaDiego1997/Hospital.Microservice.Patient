@@ -26,9 +26,9 @@ namespace Microservice.Patients.Application.Commands.Handlers
         {
             try
             {
-                await _unitOfWork.BeginTransactionAsync();
+                _unitOfWork.BeginTransaction();
                 int? output = _unitOfWork.Patient_Repository.Delete(request.Dni);
-                await _unitOfWork.SaveChangesAsync();
+                _ = _unitOfWork.SaveChanges();
                 await _unitOfWork.CommitTransactionAsync();
                 return output;
             }
