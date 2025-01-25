@@ -21,26 +21,28 @@ obj/
 *.lock.json
 
 # .NET files
-project.lock.json
-project.fragment.lock.json
 artifacts/
 *.dbmdl
 *.log
 
 # .NET Core files
+project.lock.json
+project.fragment.lock.json
 *.runtimeconfig.json
 *.deps.json
 
-# C# files
-**/*.dll
-**/*.exe
-**/*.pdb
-**/*.cache
-**/*.log
+# C# compiled binaries
+**/bin/
+**/obj/
+*.dll
+*.exe
+*.pdb
+*.cache
 
 # NuGet
 *.nupkg
-*.nuget/
+*.snupkg
+.nuget/
 
 # MSBuild files
 *.props
@@ -51,6 +53,19 @@ artifacts/
 *.swp
 *.swm
 
-# Other
+# Logs
+*.log
+logs/
 temp/
 *.tmp
+
+# OS-generated files
+Thumbs.db
+.DS_Store
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Other
+*.vspscc
+*.vssscc
