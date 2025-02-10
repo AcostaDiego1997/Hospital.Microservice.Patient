@@ -69,3 +69,6 @@ $RECYCLE.BIN/
 # Other
 *.vspscc
 *.vssscc
+
+# Ignorar el archivo appsettings de la API
+appsettings.json

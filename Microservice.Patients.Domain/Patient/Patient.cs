@@ -34,6 +34,7 @@ namespace Microservice.Patients.Domain.Patient
         public int Dni { get => _dni; }
         public string Name { get => _name; }
         public string LastName { get => _lastname; }
+        public string FullName { get => $"{_name} {_lastname}"; }
         public bool Status { get => _status; }
         public Email Email { get => _email; }
         public Password Password { get => _password; }

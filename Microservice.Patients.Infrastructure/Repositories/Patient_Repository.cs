@@ -66,6 +66,12 @@ namespace Microservice.Patients.Infrastructure.Repositories
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<Patient>? GetByDni(List<int> dnis)
+        {
+            return _dataContext.Patients.Where(p => dnis.Contains(p.Dni)).ToList();
+        }
+
         public Patient? GetByEmail(string email)
         {
             try
@@ -76,6 +82,11 @@ namespace Microservice.Patients.Infrastructure.Repositories
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public List<Patient> GetById(List<int> ids)
+        {
+            return [.. _dataContext.Patients.Where(p => ids.Contains(p.Id))];
         }
 
         public int UniquePatientValidation(Patient_DTO dto)

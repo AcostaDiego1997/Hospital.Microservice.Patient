@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Microservice.Patients.Application.DTO
 {
-    public class HttpResponse_DTO<T>
+    public class PatientSummary_DTO
     {
-        public bool IsSuccess { get; set; }
-        public string Message { get; set; } = null!;
-        public T Entity { get; set; }
+        public int Id { get; set; }
+        public int Dni { get; set; }
+        public string FullName { get; set; } = null!;
     }
 }

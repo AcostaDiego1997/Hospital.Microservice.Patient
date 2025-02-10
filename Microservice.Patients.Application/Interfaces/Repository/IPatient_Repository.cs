@@ -7,8 +7,10 @@ namespace Microservice.Patients.Application.Interfaces.Repository
     {
         void Add(Patient patient);
         Patient? GetByDni(int dni);
+        List<Patient>? GetByDni(List<int> dnis);
         Patient? GetByEmail(string email);
         List<Patient> GetAll();
+        List<Patient> GetById(List<int> ids);
         int? Delete(int dni);
         int UniquePatientValidation(Patient_DTO dto);
     }
