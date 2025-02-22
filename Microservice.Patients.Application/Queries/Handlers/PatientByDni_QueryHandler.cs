@@ -7,7 +7,7 @@ using Microservice.Patients.Domain.Patient;
 
 namespace Microservice.Patients.Application.Queries.Handlers
 {
-    public class PatientByDni_QueryHandler : IRequestHandler<PatientByDni_Query, Patient_DTO>
+    public class PatientByDni_QueryHandler : IRequestHandler<PatientByDni_Query, GetPatient_DTO>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -18,13 +18,13 @@ namespace Microservice.Patients.Application.Queries.Handlers
             _mapper = mapper;
         }
 
-        public async Task<Patient_DTO> Handle(PatientByDni_Query request, CancellationToken cancellationToken)
+        public async Task<GetPatient_DTO> Handle(PatientByDni_Query request, CancellationToken cancellationToken)
         {
             try
             {
-                Patient patient = _unitOfWork.Patient_Repository.GetByDni(request.Dni) ?? throw new ArgumentException($"No existe un paciente con dni '{request.Dni}'");
+                List<Patient> patient = _unitOfWork.Patient_Repository.GetById(new List<int>{ request.Id}) ?? throw new ArgumentException($"No existe un paciente con Id '{request.Id}'");
 
-                Patient_DTO output = _mapper.Map<Patient_DTO>(patient);
+                GetPatient_DTO output = _mapper.Map<GetPatient_DTO>(patient[0]);
 
                 return output;
             }

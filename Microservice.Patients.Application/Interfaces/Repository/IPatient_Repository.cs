@@ -12,6 +12,6 @@ namespace Microservice.Patients.Application.Interfaces.Repository
         List<Patient> GetAll();
         List<Patient> GetById(List<int> ids);
         int? Delete(int dni);
-        int UniquePatientValidation(Patient_DTO dto);
+        int UniquePatientValidation(GetPatient_DTO dto);
     }
 }

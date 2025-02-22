@@ -11,47 +11,45 @@ namespace Microservice.Patients.Api.Controllers
     [Route("api/[controller]")]
     public class PatientController : ControllerBase
     {
-        private readonly IAuth_Service _authservice;
         private readonly IMediator _mediator;
 
-        public PatientController( IAuth_Service authservice, IMediator mediator) {
-            _authservice = authservice;
+        public PatientController(IMediator mediator)
+        {
             _mediator = mediator;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get(int dni)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
         {
             try
             {
-                //Patient_DTO? output = _service.GetByDni(dni);
-                Patient_DTO output = await _mediator.Send(new PatientByDni_Query(dni));
+                GetPatient_DTO output = await _mediator.Send(new PatientByDni_Query(id));
 
-                return Ok(new HttpResponse_DTO<Patient_DTO>
+                return Ok(new HttpResponse_DTO<GetPatient_DTO>
                 {
                     IsSuccess = true,
                     Message = (output != null) ? "Paciente obtenido con exito" : "El dni ingresado no corresponde a ningun paciente",
                     Entity = output
                 });
             }
-            catch (Exception ex) {
-                return BadRequest(new HttpResponse_DTO<Patient_DTO>
+            catch (Exception ex)
+            {
+                return BadRequest(new HttpResponse_DTO<GetPatient_DTO>
                 {
                     IsSuccess = false,
                     Message = ex.Message,
-                    Entity = new Patient_DTO()
+                    Entity = new GetPatient_DTO()
                 });
             }
         }
-
-        [HttpGet("/all")]
+        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             try
             {
-                List<Patient_DTO> output = await _mediator.Send(new AllPatients_Query());
-                
-                return Ok(new HttpResponse_DTO<List<Patient_DTO>>
+                List<GetPatient_DTO> output = await _mediator.Send(new AllPatients_Query());
+
+                return Ok(new HttpResponse_DTO<List<GetPatient_DTO>>
                 {
                     IsSuccess = true,
                     Message = "Pacientes obtenidos con exito",
@@ -60,7 +58,7 @@ namespace Microservice.Patients.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new HttpResponse_DTO<List<Patient_DTO>>
+                return BadRequest(new HttpResponse_DTO<List<GetPatient_DTO>>
                 {
                     IsSuccess = false,
                     Message = ex.Message,
@@ -68,40 +66,33 @@ namespace Microservice.Patients.Api.Controllers
                 });
             }
         }
-
-        [HttpGet("/list")]
-        public async Task<IActionResult> GetByIds([FromQuery] List<int> ids)
+        [HttpGet("summaries")]
+        public async Task<IActionResult> GetSummaries([FromQuery] List<int> id)
         {
+            HttpResponse_DTO<List<PatientsSummaries_DTO>>? output = new();
             try
             {
-                List<Patient_DTO> output = await _mediator.Send(new PatientsById_Query(ids));
-
-                return Ok(new HttpResponse_DTO<List<Patient_DTO>>
-                {
-                    IsSuccess = true,
-                    Message = "Pacientes obtenidos con exito",
-                    Entity = output
-                });
+                
+                output.Entity = await _mediator.Send(new PatientsSummaries_Query(id));
+                output.IsSuccess = true;
+                output.Message = "Resumenes obtenidos con exito.";
+                return Ok(output);
             }
             catch (Exception ex)
             {
-                return BadRequest(new HttpResponse_DTO<List<Patient_DTO>>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                    Entity = []
-                });
+                output.IsSuccess = false;
+                output.Message = ex.Message;
+                output.Entity = new();
+                return BadRequest(output);
             }
         }
-
-
         [HttpPost]
-        public async Task<IActionResult> PostMadiatr(Patient_DTO dto)
+        public async Task<IActionResult> Post(PostPatient_DTO dto)
         {
             try
             {
                 await _mediator.Send(new CreatePatient_Command(dto));
-                return Ok(new HttpResponse_DTO<Patient_DTO>
+                return Ok(new HttpResponse_DTO<PostPatient_DTO>
                 {
                     IsSuccess = true,
                     Message = "Paciente insertado con exito",
@@ -110,7 +101,7 @@ namespace Microservice.Patients.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new HttpResponse_DTO<Patient_DTO>
+                return BadRequest(new HttpResponse_DTO<PostPatient_DTO>
                 {
                     IsSuccess = false,
                     Message = ex.Message,
@@ -118,7 +109,6 @@ namespace Microservice.Patients.Api.Controllers
                 });
             }
         }
-
         [HttpDelete]
         public async Task<IActionResult> Delete(int dni)
         {
@@ -140,55 +130,6 @@ namespace Microservice.Patients.Api.Controllers
                     IsSuccess = false,
                     Message = ex.Message,
                     Entity = -1
-                });
-            }
-        }
-
-        [HttpGet("/summary/{dni}")]
-        public async Task<IActionResult> GetSummary(int dni)
-        {
-            try
-            {
-                PatientSummary_DTO? output = await _mediator.Send(new PatientSummary_Query(dni));
-
-                return Ok(new HttpResponse_DTO<PatientSummary_DTO>
-                {
-                    IsSuccess = true,
-                    Message = (output != null) ? "PAciente obtenido con exito" : "El dni ingresado no corresponde a ningun paciente",
-                    Entity = output
-                });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new HttpResponse_DTO<PatientSummary_DTO>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                    Entity = new PatientSummary_DTO()
-                });
-            }
-        }
-        [HttpGet("/summary")]
-        public async Task<IActionResult> GetSummaries([FromQuery] List<int> dnis)
-        {
-            try
-            {
-                List<PatientSummary_DTO>? output = await _mediator.Send(new PatientSummaries_Query(dnis));
-
-                return Ok(new HttpResponse_DTO<List<PatientSummary_DTO>>
-                {
-                    IsSuccess = true,
-                    Message = (output != null) ? "Pacientes obtenidos con exito" : "Los Dnis ingresados no corresponden a ningun paciente",
-                    Entity = output
-                });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new HttpResponse_DTO<PatientSummary_DTO>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                    Entity = new PatientSummary_DTO()
                 });
             }
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Microservice.Patients.Application.DTO
 {
-    public class Patient_DTO
+    public class PostPatient_DTO
     {
         [Required]
         public int Dni { get; set; }

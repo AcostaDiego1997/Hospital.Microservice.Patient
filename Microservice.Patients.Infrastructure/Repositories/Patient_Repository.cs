@@ -89,7 +89,7 @@ namespace Microservice.Patients.Infrastructure.Repositories
             return [.. _dataContext.Patients.Where(p => ids.Contains(p.Id))];
         }
 
-        public int UniquePatientValidation(Patient_DTO dto)
+        public int UniquePatientValidation(GetPatient_DTO dto)
         {
             try
             {

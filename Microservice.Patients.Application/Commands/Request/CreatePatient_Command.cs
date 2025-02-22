@@ -15,7 +15,7 @@ namespace Microservice.Patients.Application.Commands.Request
 
 
         public CreatePatient_Command() { }
-        public CreatePatient_Command(Patient_DTO dto)
+        public CreatePatient_Command(PostPatient_DTO dto)
         {
             Dni = dto.Dni;
             Name = dto.Name;

@@ -10,6 +10,7 @@ namespace Microservice.Patients.Api.Configuration
             {
                 prf.AddProfile<Patient_Mapper>();
                 prf.AddProfile<PatientSummary_Mapper>();
+                prf.AddProfile<PatientsSummaries_Mapper>();
             });
         }
     }

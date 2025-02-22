@@ -9,7 +9,7 @@ namespace Microservice.Patients.Application.Automapper
     {
         public Patient_Mapper() {
 
-            CreateMap<Patient_DTO, Patient>()
+            CreateMap<GetPatient_DTO, Patient>()
                 .ForMember(dest => dest.Dni, opt => opt.MapFrom(src => src.Dni))
                 .ForMember(dest => dest.Name, opt => opt.Ignore())
                 .ForMember(dest => dest.LastName, opt => opt.Ignore())
@@ -21,11 +21,11 @@ namespace Microservice.Patients.Application.Automapper
                     dest.SetLastName(src.LastName);
                     dest.SetStatus(true);
                     dest.SetEmail(src.Email);
-                    dest.SetPassword(src.Password);
                     dest.SetPhone(src.Phone);
                 });
 
-            CreateMap<Patient, Patient_DTO>()
+            CreateMap<Patient, GetPatient_DTO>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Dni, opt => opt.MapFrom(src => src.Dni))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
@@ -33,10 +33,10 @@ namespace Microservice.Patients.Application.Automapper
                 .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.Phone.Value));
 
 
-            CreateMap<List<Patient>, List<Patient_DTO>>()
+            CreateMap<List<Patient>, List<GetPatient_DTO>>()
                 .ConvertUsing((src, dest, context) =>
                 {
-                    dest = src.Select(dto => context.Mapper.Map<Patient_DTO>(dto)).ToList();
+                    dest = src.Select(dto => context.Mapper.Map<GetPatient_DTO>(dto)).ToList();
 
                     return dest;
                 });
