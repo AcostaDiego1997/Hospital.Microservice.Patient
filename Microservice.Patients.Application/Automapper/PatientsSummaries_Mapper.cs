@@ -13,6 +13,7 @@ namespace Microservice.Patients.Application.Automapper
     {
         public PatientsSummaries_Mapper() {
             CreateMap<Patient, PatientsSummaries_DTO>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Dni, opt => opt.MapFrom(src => src.Dni))
                 .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email.Value))

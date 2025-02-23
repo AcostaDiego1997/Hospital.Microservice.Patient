@@ -8,6 +8,7 @@ namespace Microservice.Patients.Application.DTO
 {
     public class PatientsSummaries_DTO
     {
+        public int Id{ get; set; }
         public int Dni {  get; set; }
         public string FullName { get; set; } = null!;
         public string Email { get; set; } = null!;
