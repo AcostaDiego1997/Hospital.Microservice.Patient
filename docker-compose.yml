@@ -1,0 +1,10 @@
+services:
+  microservice.patients.api:
+    image: ${DOCKER_REGISTRY-}microservicepatientsapi
+    build:
+      context: .
+      dockerfile: Microservice.Patients.Api/Dockerfile
+networks:
+  default: 
+    external:
+      name: microservice

@@ -11,12 +11,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.Patients.Appli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.Patients.Infrastructure", "Microservice.Patients.Infrastructure\Microservice.Patients.Infrastructure.csproj", "{3F112D47-85CB-4191-82D1-B3B8F6234C31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservice.Patients.Test", "Microservice.Patients.Test\Microservice.Patients.Test.csproj", "{CBAA2928-4592-49CB-BEB6-82D4BB46E490}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.Patients.Test", "Microservice.Patients.Test\Microservice.Patients.Test.csproj", "{CBAA2928-4592-49CB-BEB6-82D4BB46E490}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5CB675CF-BF5A-4A2F-B2B0-A50718B8A5A5}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 	EndProjectSection
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{269B9E56-32FA-49BF-AFD7-F32BDD5748E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{CBAA2928-4592-49CB-BEB6-82D4BB46E490}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBAA2928-4592-49CB-BEB6-82D4BB46E490}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBAA2928-4592-49CB-BEB6-82D4BB46E490}.Release|Any CPU.Build.0 = Release|Any CPU
+		{269B9E56-32FA-49BF-AFD7-F32BDD5748E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{269B9E56-32FA-49BF-AFD7-F32BDD5748E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{269B9E56-32FA-49BF-AFD7-F32BDD5748E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{269B9E56-32FA-49BF-AFD7-F32BDD5748E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
